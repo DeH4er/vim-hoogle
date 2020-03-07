@@ -105,7 +105,7 @@ fun! HoogleCloseSearch() "{{{
 endfunction "}}}
 
 " Open a scratch buffer or reuse the previous one
-fun! HoogleLookup( search, args ) "{{{
+fun! HoogleLookup( search, ... ) "{{{
     " Ok, previous buffer to jump to it at final
     let last_buffer = bufnr("%")
 
@@ -132,9 +132,13 @@ fun! HoogleLookup( search, args ) "{{{
 
     call s:ScratchMarkBuffer()
 
-    execute '.!' . g:hoogle_search_bin . ' -n=' . g:hoogle_search_count  . ' "' . s:search . '"' . s:databases . a:args
+    if a:0 > 0
+    execute '.!hoogle -n=' . g:hoogle_search_count  . ' "' . s:search . '"' . a:args	        execute '.!hoogle -n=' . g:hoogle_search_count  . ' "' . s:search . '"' . a:1
+    else
+        execute '.!hoogle -n=' . g:hoogle_search_count  . ' "' . s:search . '"'
+    endif
     setl nomodifiable
-    
+
     let size = s:CountVisualLines()
 
     if size > g:hoogle_search_buf_size
