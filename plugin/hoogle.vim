@@ -133,7 +133,7 @@ fun! HoogleLookup( search, ... ) "{{{
     call s:ScratchMarkBuffer()
 
     if a:0 > 0
-    execute '.!hoogle -n=' . g:hoogle_search_count  . ' "' . s:search . '"' . a:args	        execute '.!hoogle -n=' . g:hoogle_search_count  . ' "' . s:search . '"' . a:1
+        execute '.!hoogle -n=' . g:hoogle_search_count  . ' "' . s:search . '"' . a:1
     else
         execute '.!hoogle -n=' . g:hoogle_search_count  . ' "' . s:search . '"'
     endif
